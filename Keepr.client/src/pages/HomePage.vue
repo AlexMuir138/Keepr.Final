@@ -4,8 +4,8 @@
       <ActiveKeep v-if="activeKeep" />
     </div>
   </div>
-  <div class="masonry-with-flex">
-    <Keep v-for="k in keeps" :key="k.id" :keep="k" />
+  <div class="masonry-with-flex m-2">
+    <Keep v-for="k in keeps" :key="k.id" :keep="k" class="keep" />
   </div>
 </template>
 
@@ -37,15 +37,12 @@ body {
   flex-direction: column;
   flex-wrap: wrap;
   max-height: 1000px;
-  div {
+  .keep {
     width: 150px;
     background-size: cover;
-    color: white;
-    margin: 0 1rem 1rem 0;
-    text-align: center;
-    font-family: system-ui;
-    font-weight: 900;
-    font-size: 2rem;
+    background-color: black;
+    color: black;
+    margin: 0 1rem 1rem 0
   }
   @for $i from 1 through 36 {
     div:nth-child(#{$i}) {

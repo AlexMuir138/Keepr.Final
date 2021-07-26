@@ -27,17 +27,6 @@ namespace Keepr.Repositories
       return _db.ExecuteScalar<int>(sql, newKeep);
     }
 
-    // public Group Create(Group data)
-    //     {
-    //         var sql = @"
-    //         INSERT INTO groups(name, description, img, creatorId)
-    //         VALUES(@Name, @Description, @Img, @CreatorId);
-    //         SELECT LAST_INSERT_ID();
-    //         ";
-    //         var id = _db.ExecuteScalar<int>(sql, data);
-    //         data.Id = id;
-    //         return data;
-    //     }
 
     internal Keep GetById(int id)
     {
