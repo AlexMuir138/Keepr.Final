@@ -1,0 +1,11 @@
+.btn-primary {
+  color: $light;
+  background-color: $primary;
+  border-color: darken($color: $primary, $amount: 10);
+  border-width: medium;
+}
+
+.shadow{
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter:drop-shadow(5px 5px 5px #222);
+}
