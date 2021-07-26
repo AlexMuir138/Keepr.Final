@@ -51,9 +51,11 @@ namespace Keepr.Controllers
     {
       try
       {
-        Account account = await HttpContext.GetUserInfoAsync<Account>();
-        newVault.CreatorId = account.Id;
-        return Ok(_vs.Create(newVault));
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        newVault.CreatorId = userInfo.Id;
+        Vault created = _vs.Create(newVault);
+        created.Creator = userInfo;
+        return Ok(created);
       }
       catch (System.Exception e)
       {

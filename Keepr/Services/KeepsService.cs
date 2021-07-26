@@ -18,8 +18,7 @@ namespace Keepr.Services
 
     internal Keep Create(Keep newKeep)
     {
-      int id = _prepo.Create(newKeep);
-      newKeep.Id = id;
+      newKeep.Id = _prepo.Create(newKeep);
       return newKeep;
     }
 

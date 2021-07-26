@@ -35,7 +35,7 @@ namespace Keepr.Repositories
       string sql = @"
       DELETE FROM vault_keeps
       WHERE id = @Id
-      limit 1;
+      LIMIT 1;
       ";
       _db.Execute(sql, new{ id });
     }
