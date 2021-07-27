@@ -5,6 +5,7 @@ using Keepr.Models;
 using Keepr.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static Keepr.Models.Keep;
 
 namespace Keepr.Controllers
 {
@@ -13,6 +14,7 @@ namespace Keepr.Controllers
   public class VaultsController : ControllerBase
   {
     private readonly VaultsService _vs;
+    private readonly KeepsService _ks;
 
     public VaultsController(VaultsService vs)
     {
@@ -94,5 +96,17 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
+    // [HttpGet("{id}/keeps")] 
+    // public ActionResult<IEnumerable<VaultKeepViewModel>> GetKeepsByVaultId(int id)
+    // {
+    //   try
+    //   {
+    //     return Ok(_ks.GetKeepsByVaultId(id));
+    //   }
+    //   catch (System.Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
   }
 }

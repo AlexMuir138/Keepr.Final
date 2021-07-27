@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using Dapper;
 using Keepr.Models;
+using static Keepr.Models.Keep;
 
 namespace Keepr.Repositories
 {
@@ -40,38 +41,7 @@ namespace Keepr.Repositories
       _db.Execute(sql, new{ id });
     }
 
-    //come back to this vv
 
-    // internal List<VaultKeep> GetKeepsByVaultId(int keepId)
-    // {
-    //   string  sql = @"
-    //   SELECT
-    //   k.*,
-    //   vk.*
-    //   FROM vault_keeps vk
-    //   JOIN keeps k ON k.id = vk.keepId`
-    //   WHERE vk.vaultId = @VaultId;
-    //   ";
-    //   return _db.Query<Keep, VaultKeep, Keep>(sql, (k, vk) =>
-    //   {
-    //     k.
-    //   }, new { keepId }, splitOn: "id").ToList();
-     
-    // }
+   
   }
 }
-//  internal List<GroupMember> GetMembersByGroupId(int id)
-//         {
-//             // REVIEW joining data and mapping to two classes
-//             string sql = @"
-//             SELECT *
-//             FROM group_members gm
-//             JOIN accounts a ON a.id = gm.accountId
-//             WHERE groupId = @id; 
-//             ";
-//             //               vv g         vv p     vv return type of the entire Query
-//             return _db.Query<GroupMember, Profile, GroupMember>(sql, (g, p) =>
-//             {
-//                 g.Profile = p;
-//                 return g;
-//             }, new { id }).ToList();

@@ -34,7 +34,6 @@ namespace Keepr.Controllers
       }
     }
 
-    // [HttpGet("id")]
 
     [HttpDelete("{id}")]
     public ActionResult<string> Delete(int id)

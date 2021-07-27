@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using Dapper;
 using Keepr.Models;
+using static Keepr.Models.Keep;
 
 namespace Keepr.Repositories
 {
@@ -75,5 +76,21 @@ namespace Keepr.Repositories
       ";
       return _db.Query<Keep>(sql).ToList();
     }
+
+    //  internal IEnumerable<VaultKeep> GetKeepsByVaultId(int keepId)
+    // {
+    //   string  sql = @"
+    //   SELECT *
+    //   FROM vault_keeps vk
+    //   JOIN accounts a ON a.id = vk.keepId`
+    //   WHERE vaultId = @id;
+    //   ";
+    //   return _db.Query<VaultKeep, Profile, VaultKeep>(sql, (v, p) =>
+    //   {
+    //     v. = p;
+    //     return v;
+    //   });
+     
+    // }
   }
 }

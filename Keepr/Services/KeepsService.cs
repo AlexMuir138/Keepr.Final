@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
+using static Keepr.Models.Keep;
 
 namespace Keepr.Services
 {
@@ -69,12 +70,12 @@ namespace Keepr.Services
       return "You ain't the owner";
     }
 
-    // come back to this vvv
-  //  public List<VaultKeep> GetKeepsByVaultId(int id)
-  //   {
-  //     return _vkreop.GetKeepsByVaultId(id);
-  //   }
+    // internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
+    // {
+    //   return _prepo.GetKeepsByVaultId(id);
+    // }
 
+    
   }
 }
 

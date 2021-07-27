@@ -1,9 +1,10 @@
 <template>
-  <div class="row keep-bg rounded shadow" :style="{ backgroundImage: `url(${keep.img})`}" @click="setActiveKeep" data-toggle="modal" data-target="activeKeepModal">
+  <div class="row keep-bg rounded shadow" :style="{ backgroundImage: `url(${keep.img})`}" @click="setActiveKeep" data-toggle="modal" data-target="#activeKeepModal">
     <div class="d-flex align-items-end mx-1">
       <h5 class="keep-name text-light text-center rounded shadow p-1">
         <p>
           {{ keep.name }}
+          {{ keep.creator }}
         </p>
       </h5>
     </div>
