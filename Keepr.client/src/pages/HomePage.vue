@@ -44,7 +44,7 @@ body {
     color: black;
     margin: 0 1rem 1rem 0
   }
-  @for $i from 1 through 36 {
+  @for $i from 1 through 500 {
     div:nth-child(#{$i}) {
       $h: (random(400) + 100) + px;
       height: $h;

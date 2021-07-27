@@ -19,9 +19,10 @@ class KeepsService {
     AppState.keeps = AppState.keeps.filter(k => k.id !== id)
   }
 
-  setActiveKeep(keepData) {
-    AppState.activeKeep = AppState.keeps[keepData.VaultId].find(k => k.id === keepData.id)
-    logger.log(AppState.activeKeep)
+  setActiveKeep(id) {
+    const keep = AppState.keeps.find(k => k.id === id)
+    logger.log(keep)
+    AppState.activeKeep = keep
   }
 
   async changeVault(vaultId, updatedKeep) {
