@@ -96,17 +96,18 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
-    // [HttpGet("{id}/keeps")] 
-    // public ActionResult<IEnumerable<VaultKeepViewModel>> GetKeepsByVaultId(int id)
-    // {
-    //   try
-    //   {
-    //     return Ok(_ks.GetKeepsByVaultId(id));
-    //   }
-    //   catch (System.Exception e)
-    //   {
-    //     return BadRequest(e.Message);
-    //   }
-    // }
+    [HttpGet("{id}/keeps")] 
+    public ActionResult<List<Keep>> GetKeepsByVaultId(int id)
+    {
+      try
+      {
+        List<VaultKeep> Keeps = _ks.GetKeepsByVaultId(id);
+        return Ok(Keeps);
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
   }
 }

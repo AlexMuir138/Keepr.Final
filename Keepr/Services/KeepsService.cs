@@ -8,29 +8,29 @@ namespace Keepr.Services
 {
   public class KeepsService
   {
-    private readonly KeepsRepository _prepo;
+    private readonly KeepsRepository _krepo;
     private readonly VaultKeepsRepository _vkreop;
 
     public KeepsService(KeepsRepository prepo, VaultKeepsRepository vkreop)
     {
-      _prepo = prepo;
+      _krepo = prepo;
       _vkreop = vkreop;
     }
 
     internal Keep Create(Keep newKeep)
     {
-      newKeep.Id = _prepo.Create(newKeep);
+      newKeep.Id = _krepo.Create(newKeep);
       return newKeep;
     }
 
     internal List<Keep> GetAll()
     {
-      return _prepo.GetAll();
+      return _krepo.GetAll();
     }
 
     public Keep GetById(int id)
     {
-       Keep keep = _prepo.GetById(id);
+       Keep keep = _krepo.GetById(id);
        if( keep != null)
        {
          return keep;
@@ -47,7 +47,7 @@ namespace Keepr.Services
         og.Description = newKeep.Description != null ? newKeep.Description : og.Description;
         og.Img = newKeep.Img != null ? newKeep.Img : og.Img;
 
-        if (_prepo.Update(newKeep) > 0)
+        if (_krepo.Update(newKeep) > 0)
         {
           return newKeep;
         }
@@ -61,7 +61,7 @@ namespace Keepr.Services
        Keep keep = GetById(id);
       if (keep?.CreatorId == userId)
       {
-        if (_prepo.Delete(id) > 0)
+        if (_krepo.Delete(id) > 0)
         {
           return "You just lost what you kept";
         }
@@ -70,10 +70,10 @@ namespace Keepr.Services
       return "You ain't the owner";
     }
 
-    // internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
-    // {
-    //   return _prepo.GetKeepsByVaultId(id);
-    // }
+    internal List<VaultKeep> GetKeepsByVaultId(int id)
+    {
+      return _krepo.GetKeepsByVaultId(id);
+    }
 
     
   }
