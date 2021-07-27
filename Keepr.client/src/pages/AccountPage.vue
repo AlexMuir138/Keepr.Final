@@ -1,23 +1,19 @@
 <template>
   <div class="container-fluid">
-    <div class="row m-2">
+    <div class="row m-5">
       <div class="col-2">
         <img class="rounded"
              :src="account.picture"
              alt=""
         />
       </div>
-      <div class="
-             col-3"
-      >
-        <div class="">
-          <h3>{{ account.name }}</h3>
-          <h4>Vaults: {{ vaults.length }}</h4>
-          <h4>Keeps: {{ keeps.length }}</h4>
-        </div>
+      <div class="col-3">
+        <h3>{{ account.name }}</h3>
+        <h4>Vaults: {{ vaults.length }}</h4>
+        <h4>Keeps: {{ keeps.length }}</h4>
       </div>
 
-      <div class="col-12">
+      <div class="col-12 m-5">
         <h2>
           Vaults
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createVaultModal">
@@ -30,7 +26,7 @@
       </div>
     </div>
     <div class="modal fade"
-         id="exampleModal"
+         id="createKeepModal"
          tabindex="-1"
          role="dialog"
          aria-labelledby="exampleModalLabel"
@@ -127,7 +123,18 @@
                        v-model="state.newVault.description"
                 >
                 <small id="helpId" class="form-text text-muted">Vault Description</small>
-                <button class="mt-5 btn btn-block btn-info">
+                <div class="col-12 d-flex justify-content-beginning">
+                  <p class="mt-3 ">
+                    Private?
+
+                    <input type="checkbox"
+                           name="isPrivate"
+                           v-model="state.newVault.isPrivate"
+                    >
+                  </p>
+                </div>
+
+                <button class=" btn btn-block btn-info">
                   Create
                 </button>
               </form>
@@ -137,9 +144,12 @@
       </div>
     </div>
     <div class="col-12">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Create a New Keep
-      </button>
+      <h2 class="m-4">
+        Keeps:
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createKeepModal">
+          +
+        </button>
+      </h2>
     </div>
   </div>
 </template>
