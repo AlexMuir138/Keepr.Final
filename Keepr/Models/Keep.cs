@@ -16,12 +16,12 @@ namespace Keepr.Models
     public int Views { get; set; }
     public int Shares { get; set; }
     public int Keeps { get; set; }
-    public Profile Creator { get; set; }
+    public Account Creator { get; set; }
 
-    public class VaultKeepViewModel : Keep
-    {
-      public int VaultKeepId {get; set; }
-    }
 
   }
+    public class VaultKeepViewModel : Keep
+    {
+      public int VaultKeepId { get; set; }
+    }
 }

@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS vault_keeps(
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
   creatorId VARCHAR(255) NOT NULL COMMENT 'FK: Account id',
-  vaultId int NOT NULL COMMENT 'FK: Vault Id',
-  keepId int NOT NULL COMMENT 'FK: Keep Id',
+  vaultId int COMMENT 'FK: Vault Id',
+  keepId int COMMENT 'FK: Keep Id',
   FOREIGN KEY (creatorId) REFERENCES accounts(id) On DELETE CASCADE,
   FOREIGN KEY (vaultId) REFERENCES vaults(id) On DELETE CASCADE,
   FOREIGN KEY (keepId) REFERENCES keeps(id) On DELETE CASCADE

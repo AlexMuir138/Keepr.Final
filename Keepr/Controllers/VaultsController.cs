@@ -33,17 +33,27 @@ namespace Keepr.Controllers
       }
     }
     [HttpGet("{id}")]
-    public ActionResult<Vault> GetById(int id)
+    async public Task<ActionResult<Vault>> GetById(int id)
     {
       try
       {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
           Vault vault = _vs.GetById(id);
-          return Ok(vault);
+          if(vault.IsPrivate != true )
+          {
+            return vault;
+          }
+          else if (userInfo.Id == vault.CreatorId)
+          {
+              return vault;
+          }
+          throw new System.Exception("Invalid!");
       }
       catch (System.Exception e)
       {
           return BadRequest(e.Message);
       }
+    
     }
 
 
@@ -96,18 +106,18 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
-    // [HttpGet("{id}/keeps")] 
-    // public ActionResult<List<Keep>> GetKeepsByVaultId(int id)
-    // {
-    //   try
-    //   {
-    //     List<VaultKeep> Keeps = _ks.GetKeepsByVaultId(id);
-    //     return Ok(Keeps);
-    //   }
-    //   catch (System.Exception e)
-    //   {
-    //     return BadRequest(e.Message);
-    //   }
-    // }
+    [HttpGet("{id}/keeps")] 
+    public async Task<ActionResult<IEnumerable<VaultKeepViewModel>>> GetKeepsByVaultId(int id)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        return Ok(_ks.GetKeepsByVaultId(id, userInfo));
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
   }
 }

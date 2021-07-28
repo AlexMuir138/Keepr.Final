@@ -56,6 +56,13 @@ namespace Keepr.Services
       }
       throw new Exception("You ain't the owner");
     }
+
+    public List<Keep> GetKeepsByProfileId(string id, Account userInfo)
+    {
+      var keeps = _krepo.GetKeepsByProfileId(id);
+      return keeps;
+    }
+
     internal string Delete(int id, string userId)
     {
        Keep keep = GetById(id);
@@ -70,10 +77,10 @@ namespace Keepr.Services
       return "You ain't the owner";
     }
 
-    // internal List<VaultKeep> GetKeepsByVaultId(int id)
-    // {
-    //   return _krepo.GetKeepsByVaultId(id);
-    // }
+    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id, Account userInfo)
+    {
+      return _krepo.GetKeepsByVaultId(id);
+    }
 
     
   }

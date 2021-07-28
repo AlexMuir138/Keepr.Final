@@ -29,11 +29,12 @@ namespace Keepr.Services
     public Vault GetById(int id)
     {
        Vault vault = _vrepo.GetById(id);
-       if( vault != null)
+       if(vault == null)
        {
-         return vault;
+         throw new Exception("Invalid!");
        }
-       throw new Exception("Vault doesn't exist fool");
+       return vault;
+  
     }
 
      internal Vault Update(int id, Vault newVault)
@@ -67,5 +68,12 @@ namespace Keepr.Services
       }
       return "You ain't the owner";
     }
+
+    public List<Vault> GetVaultsByProfileId(string id, Account userInfo)
+    {
+      var vaults = _vrepo.GetVaultsByProfileId(id);
+      return vaults;
+    }
+    
   }
 }

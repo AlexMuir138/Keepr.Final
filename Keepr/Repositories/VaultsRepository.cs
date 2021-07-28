@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -73,6 +74,23 @@ namespace Keepr.Repositories
       JOIN accounts a on v.creatorId = a.id;
       ";
       return _db.Query<Vault>(sql).ToList();
+    }
+
+    public List<Vault> GetVaultsByProfileId(string id)
+    {
+       string sql = @"
+      SELECT 
+      v.*,
+      a.*
+      FROM vaults v
+      JOIN accounts a ON v.CreatorId = a.id
+      WHERE a.id = @id;
+      ";
+      return _db.Query<Vault, Account, Vault>(sql, (v, a)=>
+      {
+        v.Creator = a;
+        return v;
+      }, new {id}).ToList();
     }
   }
 }
