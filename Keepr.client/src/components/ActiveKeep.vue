@@ -21,9 +21,11 @@
             Views: {{ activeKeep.views }}
             Keeps: {{ activeKeep.keeps }}
             <div class="pt-5 text-center">
-              {{ activeKeep.name }}
+              <h2>
+                {{ activeKeep.name }}
+              </h2>
             </div>
-            <div>
+            <div class="p-3">
               {{ activeKeep.description }}
             </div>
             <div class="dropdown px-5">
@@ -71,12 +73,15 @@ export default {
       state,
       activeKeep: computed(() => AppState.activeKeep),
       vaults: computed(() => AppState.vaults),
-      async addToVault(newVaultKeep) {
-        state.newKeep.vaultId = newVaultKeep
-        await keepsService.addToVault(AppState.activeKeep.vaultId, state.newKeep)
+      keeps: computed(() => AppState.keeps),
+      async addToVault(vaultId) {
+        state.newKeep.vaultId = vaultId
+        state.newKeep.keepId = AppState.activeKeep.id
+        await keepsService.addToVault(state.newKeep)
       }
     }
   }
+
 }
 </script>
 

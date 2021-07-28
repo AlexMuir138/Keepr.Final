@@ -9,7 +9,7 @@
         {{ vault.description }}
       </h4>
       <div class="d-flex justify-content-center">
-        <button @click="deleteVault(vault.id)" class="btn btn-danger" title="Delete Vault">
+        <button @click="deleteVault(vault.id)" v-if="vault.creatorId === account.id" class="btn btn-danger" title="Delete Vault">
           Delete
         </button>
       </div>
@@ -28,7 +28,7 @@
         <p>Private man!</p>
       </div>
       <div class="d-flex justify-content-center">
-        <button @click="deleteVault(vault.id)" class="btn btn-danger" title="Delete Vault">
+        <button @click="deleteVault(vault.id)" v-if="vault.creatorId === account.id" class="btn btn-danger" title="Delete Vault">
           Delete
         </button>
       </div>
@@ -37,8 +37,9 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { computed, reactive } from 'vue'
 import { vaultsService } from '../services/VaultsService'
+import { AppState } from '../AppState'
 export default {
   props: {
     vault: { type: Object, required: true }
@@ -48,6 +49,7 @@ export default {
     })
     return {
       state,
+      account: computed(() => AppState.account),
       async deleteVault(id) {
         await vaultsService.deleteVault(id)
       }

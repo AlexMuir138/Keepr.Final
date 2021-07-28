@@ -15,9 +15,10 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { computed, reactive } from 'vue'
 import { keepsService } from '../services/KeepsService'
 import { profilesService } from '../services/ProfilesService'
+import { AppState } from '../AppState'
 export default {
   props: {
     keep: { type: Object, required: true },
@@ -28,6 +29,7 @@ export default {
     })
     return {
       state,
+      account: computed(() => AppState.account),
       setActiveKeep() {
         try {
           keepsService.setActiveKeep(props.keep.id)

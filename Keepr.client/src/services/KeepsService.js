@@ -31,11 +31,9 @@ class KeepsService {
     AppState.activeKeep = keep
   }
 
-  async addToVault(vaultId, newKeep) {
-    const res = await api.post('api/vaultkeeps', newKeep)
+  async addToVault(newVaultKeep) {
+    const res = await api.post('api/vaultkeeps', newVaultKeep)
     logger.log(res.data)
-    AppState.keeps[vaultId] = AppState.keeps[vaultId].filter(k => k.id !== res.data.id)
-    AppState.keeps[res.data.vaultId].push(res.data)
   }
 }
 export const keepsService = new KeepsService()
