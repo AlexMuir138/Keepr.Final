@@ -16,10 +16,12 @@ namespace Keepr.Controllers
     private readonly VaultsService _vs;
     private readonly KeepsService _ks;
 
-    public VaultsController(VaultsService vs)
+    public VaultsController(VaultsService vs, KeepsService ks)
     {
       _vs = vs;
+      _ks = ks;
     }
+
     [HttpGet]
     public ActionResult<List<Vault>> GetAll()
     {

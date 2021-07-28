@@ -10,11 +10,13 @@ namespace Keepr.Services
   {
     private readonly KeepsRepository _krepo;
     private readonly VaultKeepsRepository _vkreop;
+    private readonly VaultsRepository _vrepo;
 
-    public KeepsService(KeepsRepository prepo, VaultKeepsRepository vkreop)
+    public KeepsService(KeepsRepository krepo, VaultKeepsRepository vkreop, VaultsRepository vrepo)
     {
-      _krepo = prepo;
+      _krepo = krepo;
       _vkreop = vkreop;
+      _vrepo = vrepo;
     }
 
     internal Keep Create(Keep newKeep)
@@ -79,6 +81,11 @@ namespace Keepr.Services
 
     internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id, Account userInfo)
     {
+      var vault = _vrepo.GetById(id);
+      if(vault.IsPrivate == true)
+      {
+        throw new Exception("Private");
+      }
       return _krepo.GetKeepsByVaultId(id);
     }
 
