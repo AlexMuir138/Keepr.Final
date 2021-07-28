@@ -13,10 +13,12 @@
 import { computed, onMounted } from 'vue'
 import { keepsService } from '../services/KeepsService'
 import { AppState } from '../AppState'
+import { vaultsService } from '../services/VaultsService'
 export default {
   setup() {
     onMounted(() => {
       keepsService.getAllKeeps()
+      vaultsService.getVaults()
     })
     return {
       keeps: computed(() => AppState.keeps),

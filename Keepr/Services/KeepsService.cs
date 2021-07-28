@@ -70,10 +70,10 @@ namespace Keepr.Services
       return "You ain't the owner";
     }
 
-    internal List<VaultKeep> GetKeepsByVaultId(int id)
-    {
-      return _krepo.GetKeepsByVaultId(id);
-    }
+    // internal List<VaultKeep> GetKeepsByVaultId(int id)
+    // {
+    //   return _krepo.GetKeepsByVaultId(id);
+    // }
 
     
   }

@@ -77,22 +77,22 @@ namespace Keepr.Repositories
       return _db.Query<Keep>(sql).ToList();
     }
 
-     internal List<VaultKeep> GetKeepsByVaultId(int id)
-    {
-      string  sql = @"
-      SELECT 
-      k.*,
-      vk.id AS vaultKeepId
-      FROM vault_keeps vk
-      JOIN keeps k ON vk.keepId = k.id 
-      WHERE vaultId = @Id;
-      ";
-      return _db.Query<VaultKeepViewModel, VaultKeep, VaultKeepViewModel>(sql, (k, vk) =>
-      {
-        vk.Keep = k;
-        return vk;
-      }, new {id}, splitOn: "id").ToList();
-     
-    }
   }
 }
+    //  internal List<VaultKeep> GetKeepsByVaultId(int id)
+    // {
+    //   string  sql = @"
+    //   SELECT 
+    //   k.*,
+    //   vk.id AS vaultKeepId
+    //   FROM vault_keeps vk
+    //   JOIN keeps k ON vk.keepId = k.id 
+    //   WHERE vaultId = @Id;
+    //   ";
+    //   return _db.Query<VaultKeepViewModel, VaultKeep, VaultKeepViewModel>(sql, (k, vk) =>
+    //   {
+    //     vk.Keep = k;
+    //     return vk;
+    //   }, new {id}, splitOn: "id").ToList();
+     
+    // }

@@ -26,6 +26,30 @@
             <div>
               {{ activeKeep.description }}
             </div>
+            <div class="dropdown px-5">
+              <button class="btn btn-secondary dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      title="Add to vault"
+              >
+                Add to Vault...
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a
+                  class="dropdown-item"
+
+                  v-for="vault in vaults"
+                  :key="vault.id"
+                  @click="addToVault(vault.id)"
+                  :title="vault.name"
+                >
+                  {{ vault.name }}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -34,15 +58,25 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { keepsService } from '../services/KeepsService'
+
 export default {
   setup() {
+    const state = reactive({
+      newKeep: { id: AppState.activeKeep.id }
+    })
     return {
-      activeKeep: computed(() => AppState.activeKeep)
+      state,
+      activeKeep: computed(() => AppState.activeKeep),
+      vaults: computed(() => AppState.vaults),
+      async addToVault(newVaultKeep) {
+        state.newKeep.vaultId = newVaultKeep
+        await keepsService.addToVault(AppState.activeKeep.vaultId, state.newKeep)
+      }
     }
   }
-
 }
 </script>
 
