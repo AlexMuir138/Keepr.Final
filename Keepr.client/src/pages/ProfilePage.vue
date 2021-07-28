@@ -4,10 +4,11 @@
       <div class="col-2">
         <img class="rounded-circle"
              alt=""
+             :src="profile.picture"
         />
       </div>
       <div class="col-3">
-        <h3></h3>
+        <h3>{{ profile.name }}</h3>
         <h4>Vaults: {{ vaults.length }}</h4>
         <h4>Keeps: {{ keeps.length }}</h4>
       </div>
@@ -150,6 +151,9 @@
         </button>
       </h2>
     </div>
+    <div class="masonry-with-flex m-2">
+      <Keep v-for="k in keeps" :key="k.id" :keep="k" class="keep" />
+    </div>
   </div>
 </template>
 
@@ -158,10 +162,15 @@ import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
 import { vaultsService } from '../services/VaultsService'
+import { useRoute } from 'vue-router'
+import { profilesService } from '../services/ProfilesService'
 export default {
   setup() {
+    const route = useRoute()
     onMounted(() => {
-      vaultsService.getVaults()
+      profilesService.getProfileById(route.params.id)
+      keepsService.getKeepsById(route.params.id)
+      vaultsService.getVaultsById(route.params.id)
     })
     const state = reactive({
       newKeep: {},
@@ -171,9 +180,11 @@ export default {
       state,
       vaults: computed(() => AppState.vaults),
       keeps: computed(() => AppState.keeps),
+      profile: computed(() => AppState.profile),
       activeProfile: computed(() => AppState.activeProfile),
       createKeep() {
         keepsService.createKeep(state.newKeep)
+        vaultsService.getVaults()
       },
       createVault() {
         vaultsService.createVault(state.newVault)
@@ -185,5 +196,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+body {
+  margin: 0;
+  padding: 1rem;
+}
 
+.masonry-with-flex {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 1000px;
+  .keep {
+    width: 150px;
+    background-size: cover;
+    background-color: black;
+    color: black;
+    margin: 0 1rem 1rem 0
+  }
+  @for $i from 1 through 500 {
+    div:nth-child(#{$i}) {
+      $h: (random(400) + 100) + px;
+      height: $h;
+      line-height: $h;
+    }
+  }
+}
 </style>

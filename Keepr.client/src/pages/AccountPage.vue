@@ -3,8 +3,8 @@
     <div class="row m-5">
       <div class="col-2">
         <img class="rounded-circle"
-             :src="account.picture"
              alt=""
+             :src="account.picture"
         />
       </div>
       <div class="col-3">

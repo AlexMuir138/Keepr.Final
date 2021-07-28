@@ -1,7 +1,5 @@
 <template>
-  <div class="col-12 d-flex flex-row">
-    <Vault v-for="v in vaults" :key="v.id" :vault="v" />
-  </div>
+  <div>Da Vaults</div>
 </template>
 <script>
 import { computed, onMounted, reactive } from '@vue/runtime-core'

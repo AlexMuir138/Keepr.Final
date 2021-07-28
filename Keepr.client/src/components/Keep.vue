@@ -3,7 +3,7 @@
     <div class="d-flex align-items-end justify-content-center mx-1">
       <h5 class="keep-name text-light text-center rounded shadow p-1">
         {{ keep.name }}
-        <router-link :to="{name: 'Profile', params: {id: profile.id}}" @click="setActiveProfile" :title="profile.name">
+        <router-link :to="{name: 'Profile', params: {id: keep.creatorId}}" @click="setActiveProfile">
           <img class="rounded-circle"
                :src="keep.creator.picture"
                height="30"
@@ -42,7 +42,7 @@ export default {
         try {
           profilesService.setActiveProfile(props.profile.id)
         } catch (error) {
-
+          Notification.toast(error.message, 'error')
         }
       }
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="Vault card m-3 shadow" v-if="vault.isPrivate == false">
+  <div class="Vault card m-3 col-sm-3 shadow" v-if="vault.isPrivate == false">
     <div class="p-3">
       <h3 class="text-primary text-center">
         <u>{{ vault.name }}</u>
