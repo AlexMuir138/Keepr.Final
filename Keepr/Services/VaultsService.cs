@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Keepr.Models;
 using Keepr.Repositories;
 
@@ -58,7 +59,7 @@ namespace Keepr.Services
     internal string Delete(int id, string userId)
     {
        Vault vault = GetById(id);
-      if (vault?.CreatorId == userId)
+      if (vault.CreatorId == userId)
       {
         if (_vrepo.Delete(id) > 0)
         {
@@ -66,14 +67,24 @@ namespace Keepr.Services
         }
         return "Bad Id";
       }
-      return "You ain't the owner";
+      throw new Exception("You're an Invalid");
+      
     }
 
-    public List<Vault> GetVaultsByProfileId(string id, Account userInfo)
+    internal List<Vault> GetPublicVaults(string id)
     {
-      var vaults = _vrepo.GetVaultsByProfileId(id);
-      return vaults;
+      List<Vault> profileVaults = _vrepo.GetVaultsByProfileId(id);
+      List<Vault> newProfileVaults = profileVaults.Where(v => v.IsPrivate != true).ToList();
+      return newProfileVaults;
     }
-    
+
+   
+
+    internal object GetVaultsByProfileId(string id)
+    {
+      List<Vault> profileVaults = _vrepo.GetVaultsByProfileId(id);
+      List<Vault> newProfileVaults = profileVaults.Where(v => v.CreatorId == id).ToList();
+      return newProfileVaults;
+    }
   }
 }

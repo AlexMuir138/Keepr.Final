@@ -23,9 +23,9 @@ namespace Keepr.Controllers
     {
       try
       {
-          Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-          vkData.CreatorId = userInfo.Id;
-          return Ok(_vks.CreateVaultKeep(vkData));
+          Account account = await HttpContext.GetUserInfoAsync<Account>();
+          vkData.CreatorId = account.Id;
+          return Ok(_vks.CreateVaultKeep(vkData, account.Id));
         
       }
       catch (System.Exception e)
@@ -36,11 +36,13 @@ namespace Keepr.Controllers
 
 
     [HttpDelete("{id}")]
-    public ActionResult<string> Delete(int id)
+    [Authorize]
+    public async Task<ActionResult<string>> DeleteAsync(int id)
     {
       try
       {
-          _vks.Delete(id);
+        Account account = await HttpContext.GetUserInfoAsync<Account>();
+          _vks.Delete(id, account.Id);
           return Ok("She gone bruh");
       }
       catch (System.Exception e)

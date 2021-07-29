@@ -114,6 +114,10 @@ namespace Keepr.Controllers
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        if(userInfo == null)
+        {
+          return Ok(_ks.GetKeepsByVaultId(id));
+        }
         return Ok(_ks.GetKeepsByVaultId(id, userInfo));
       }
       catch (System.Exception e)

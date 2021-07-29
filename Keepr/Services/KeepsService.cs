@@ -45,9 +45,11 @@ namespace Keepr.Services
       Keep og = GetById(id);
       if (og.CreatorId == newKeep.CreatorId)
       {
-        og.Name = newKeep.Name != null ? newKeep.Name : og.Name;
-        og.Description = newKeep.Description != null ? newKeep.Description : og.Description;
-        og.Img = newKeep.Img != null ? newKeep.Img : og.Img;
+        newKeep.Name = newKeep.Name != null ? newKeep.Name : og.Name;
+        newKeep.Description = newKeep.Description != null ? newKeep.Description : og.Description;
+        newKeep.Img = newKeep.Img != null ? newKeep.Img : og.Img;
+        newKeep.Views = newKeep.Views == (og.Views += 1)  ? newKeep.Views : og.Views;
+        newKeep.Keeps = newKeep.Keeps == (og.Keeps += 1)  ? newKeep.Keeps : og.Keeps;
 
         if (_krepo.Update(newKeep) > 0)
         {
@@ -68,7 +70,7 @@ namespace Keepr.Services
     internal string Delete(int id, string userId)
     {
        Keep keep = GetById(id);
-      if (keep?.CreatorId == userId)
+      if (keep.CreatorId == userId)
       {
         if (_krepo.Delete(id) > 0)
         {
@@ -76,7 +78,7 @@ namespace Keepr.Services
         }
         return "Bad Id";
       }
-      return "You ain't the owner";
+      throw new Exception("You're an Invalid");
     }
 
     internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id, Account userInfo)
@@ -84,12 +86,24 @@ namespace Keepr.Services
       var vault = _vrepo.GetById(id);
       if(vault.IsPrivate == true)
       {
+        if(vault.CreatorId == userInfo.Id)
+        {
+        return _krepo.GetKeepsByVaultId(id);
+        }
         throw new Exception("Private");
       }
       return _krepo.GetKeepsByVaultId(id);
     }
 
-    
+    internal object GetKeepsByVaultId(int id)
+    {
+       var vault = _vrepo.GetById(id);
+       if(vault.IsPrivate == true)
+      {
+        throw new Exception("Private");
+      }
+      return _krepo.GetKeepsByVaultId(id);
+    }
   }
 }
 

@@ -35,5 +35,13 @@ class KeepsService {
     const res = await api.post('api/vaultkeeps', newVaultKeep)
     logger.log(res.data)
   }
+
+  async viewCount(id, keep) {
+    keep.views = (keep.views += 1)
+    const res = await api.put('api/keeps/view' + id, keep)
+    logger.log(res.data)
+    AppState.keeps = AppState.keeps.filter(k => k.id !== id)
+    AppState.keeps = [...AppState.keeps, res.data]
+  }
 }
 export const keepsService = new KeepsService()

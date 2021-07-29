@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
@@ -55,8 +56,11 @@ namespace Keepr.Controllers
       Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
       try
       {
-          List<Vault> vaults = _vs.GetVaultsByProfileId(id, userInfo);
-          return Ok(vaults);
+          if(userInfo == null )
+          {
+            return Ok(_vs.GetPublicVaults(id));
+          }
+          return Ok(_vs.GetVaultsByProfileId(id));
       }
       catch (System.Exception e)
       {

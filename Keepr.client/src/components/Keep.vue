@@ -30,22 +30,16 @@ export default {
     return {
       state,
       account: computed(() => AppState.account),
+
       setActiveKeep() {
-        try {
-          keepsService.setActiveKeep(props.keep.id)
-        } catch (error) {
-          Notification.toast(error.message, 'error')
-        }
+        keepsService.setActiveKeep(props.keep.id)
+        keepsService.viewCount(props.keep.id, props.keep)
       },
       async deleteKeep(id) {
         await keepsService.deleteKeep(id)
       },
       setActiveProfile() {
-        try {
-          profilesService.setActiveProfile(props.profile.id)
-        } catch (error) {
-          Notification.toast(error.message, 'error')
-        }
+        profilesService.setActiveProfile(props.profile.id)
       }
     }
   }

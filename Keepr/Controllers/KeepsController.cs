@@ -72,8 +72,25 @@ namespace Keepr.Controllers
       try
       {
         Account account = await HttpContext.GetUserInfoAsync<Account>();
-        newKeep.CreatorId = account.Id;
         newKeep.Id = id;
+        newKeep.CreatorId = account.Id;
+        return Ok(_ks.Update(id, newKeep));
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+    [HttpPut("/views/{id}")]
+    async public Task<ActionResult<Keep>> UpdateKeep(int id, [FromBody] Keep newKeep)
+    {
+      try
+      {
+        newKeep.CreatorId = null;
+        newKeep.Id = id;
+        newKeep.Name = null;
+        newKeep.Description = null;
+        newKeep.Img = null;
         return Ok(_ks.Update(id, newKeep));
       }
       catch (System.Exception e)
