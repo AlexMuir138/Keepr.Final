@@ -21,7 +21,7 @@
           </button>
         </h2>
       </div>
-      <div class="col-12 d-flex flex-row">
+      <div class="col-12 d-flex">
         <Vault v-for="v in vaults" :key="v.id" :vault="v" />
       </div>
     </div>
@@ -158,7 +158,7 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive } from 'vue'
+import { computed, onMounted, reactive, watchEffect } from 'vue'
 import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
 import { vaultsService } from '../services/VaultsService'
@@ -167,7 +167,7 @@ import { profilesService } from '../services/ProfilesService'
 export default {
   setup() {
     const route = useRoute()
-    onMounted(() => {
+    watchEffect(() => {
       profilesService.getProfileById(route.params.id)
       keepsService.getKeepsById(route.params.id)
       vaultsService.getVaultsById(route.params.id)
@@ -184,11 +184,11 @@ export default {
       activeProfile: computed(() => AppState.activeProfile),
       createKeep() {
         keepsService.createKeep(state.newKeep)
-        vaultsService.getVaults()
+        vaultsService.getVaultsById(route.params.id)
       },
       createVault() {
         vaultsService.createVault(state.newVault)
-        vaultsService.getVaults()
+        vaultsService.getVaultsById(route.params.id)
       }
     }
   }

@@ -1,6 +1,8 @@
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
+import Notifier from '../utils/Notifier'
+import { router } from '../router'
 
 class VaultsService {
   async getVaults() {
@@ -32,9 +34,13 @@ class VaultsService {
   }
 
   async getVaultById(vaultId) {
-    const res = await api.get('api/vaults/' + vaultId)
-    logger.log('da vault', res.data)
-    AppState.vault = res.data
+    try {
+      const res = await api.get('api/vaults/' + vaultId)
+      logger.log('da vault', res.data)
+      AppState.vault = res.data
+    } catch (error) {
+      router.push({ name: 'Home' })
+    }
   }
 }
 export const vaultsService = new VaultsService()

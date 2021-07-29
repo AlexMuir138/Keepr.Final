@@ -1,14 +1,15 @@
 <template>
-  <div class="row keep-bg rounded shadow" :style="{ backgroundImage: `url(${keep.img})`}" @click.stop="setActiveKeep" data-toggle="modal" data-target="#activeKeepModal">
+  <div class="row keep-bg rounded shadow" :style="{ backgroundImage: `url(${keep.img})`}" @click="setActiveKeep" data-toggle="modal" data-target="#activeKeepModal">
     <div class="d-flex align-items-end justify-content-center mx-1">
+      <div>
+      </div>
       <h5 class="keep-name text-light text-center rounded shadow p-1">
         {{ keep.name }}
-        <router-link :to="{name: 'Profile', params: {id: keep.creatorId}}" @click="setActiveProfile">
-          <img class="rounded-circle"
-               :src="keep.creator.picture"
-               height="30"
-          />
-        </router-link>
+        <div>
+          <button @click="deleteVaultKeep(keep.vaultKeepId)" v-if="keep.creatorId === account.id" class="" title="Delete Vault">
+            x
+          </button>
+        </div>
       </h5>
     </div>
   </div>
@@ -17,31 +18,30 @@
 <script>
 import { computed, reactive } from 'vue'
 import { keepsService } from '../services/KeepsService'
-import { profilesService } from '../services/ProfilesService'
 import { AppState } from '../AppState'
+import { useRoute } from 'vue-router'
 export default {
   props: {
-    keep: { type: Object, required: true }
+    keep: { type: Object, required: true },
+    profile: { type: Object, required: true }
   },
   setup(props) {
+    const route = useRoute()
     const state = reactive({
     })
     return {
       state,
-      profile: computed(() => AppState.profile),
       account: computed(() => AppState.account),
 
       setActiveKeep() {
         keepsService.setActiveKeep(props.keep.id)
         keepsService.viewCount(props.keep.id, props.keep)
       },
-      async deleteKeep(id) {
+      async deleteVaultKeep(id) {
         if (confirm('do you really want to delete')) {
-          await keepsService.deleteKeep(id)
+          await keepsService.deleteVaultKeep(id)
+          await keepsService.getKeepsByVaultId(route.params.id)
         }
-      },
-      setActiveProfile() {
-        profilesService.setActiveProfile(props.profile.id)
       }
     }
   }

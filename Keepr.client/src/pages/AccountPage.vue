@@ -2,10 +2,12 @@
   <div class="container-fluid">
     <div class="row m-5">
       <div class="col-2">
-        <img class="rounded-circle"
-             alt=""
-             :src="account.picture"
-        />
+        <router-link :to="{name: 'Profile', params: {id: account.id}}" @click="setActiveProfile">
+          <img class="rounded-circle"
+               alt=""
+               :src="account.picture"
+          />
+        </router-link>
       </div>
       <div class="col-3">
         <h3>{{ account.name }}</h3>
