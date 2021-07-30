@@ -6,9 +6,9 @@
        aria-labelledby="activeKeepModalTitle"
        aria-hidden="true"
   >
-    <div class=" modal-dialog modal-dialog-centered" role="document">
-      <div class="comment-form modal-content row">
-        <div class="modal-header">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="comment-form modal-content">
+        <div class="row">
           <div class="col-6">
             <h5 class="modal-title text-dark" id="exampleModalLongTitle">
               <img :src="activeKeep.img" class="rounded img-fluid" />
@@ -28,28 +28,32 @@
             <div class="p-3">
               {{ activeKeep.description }}
             </div>
-            <div class="dropdown px-5">
-              <button class="btn btn-secondary dropdown-toggle"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      title="Add to vault"
-              >
-                Add to Vault...
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a
-                  class="dropdown-item"
+            <div class="row">
+              <div class="col-12 problem-child d-flex align-items-end">
+                <div class="dropdown px-5 ">
+                  <button class=" btn btn-secondary dropdown-toggle"
+                          type="button"
+                          id="dropdownMenuButton"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          title="Add to vault"
+                  >
+                    Add to Vault...
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a
+                      class="dropdown-item"
 
-                  v-for="vault in vaults"
-                  :key="vault.id"
-                  @click="addToVault(vault.id)"
-                  :title="vault.name"
-                >
-                  {{ vault.name }}
-                </a>
+                      v-for="vault in vaults"
+                      :key="vault.id"
+                      @click="addToVault(vault.id)"
+                      :title="vault.name"
+                    >
+                      {{ vault.name }}
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -86,5 +90,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// .vaultbutton{
+//   bottom: 0;
+// }
 
+.problem-child{
+  min-height: 43vh;
+}
 </style>

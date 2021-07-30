@@ -49,7 +49,7 @@ class KeepsService {
 
   async viewCount(id, keep) {
     keep.views = (keep.views += 1)
-    const res = await api.put('api/keeps/view' + id, keep)
+    const res = await api.put('api/keeps/views/' + id, keep)
     logger.log(res.data)
     AppState.keeps = AppState.keeps.filter(k => k.id !== id)
     AppState.keeps = [...AppState.keeps, res.data]

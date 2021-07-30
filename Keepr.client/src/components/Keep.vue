@@ -1,5 +1,5 @@
 <template>
-  <div class="row keep-bg rounded shadow" :style="{ backgroundImage: `url(${keep.img})`}" @click.stop="setActiveKeep" data-toggle="modal" data-target="#activeKeepModal">
+  <div class="row keep-bg rounded shadow" :style="{ backgroundImage: `url(${keep.img})`}" @click="setActiveKeep" data-toggle="modal" data-target="#activeKeepModal">
     <div class="d-flex align-items-end justify-content-center mx-1">
       <h5 class="keep-name text-light text-center rounded shadow p-1">
         {{ keep.name }}
@@ -9,6 +9,9 @@
                height="30"
           />
         </router-link>
+        <button @click="deleteKeep(keep.id)" v-if="keep.creatorId == account.id">
+          x
+        </button>
       </h5>
     </div>
   </div>

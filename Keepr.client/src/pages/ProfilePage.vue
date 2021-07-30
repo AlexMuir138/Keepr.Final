@@ -55,6 +55,7 @@
                      aria-describedby="helpId"
                      placeholder=""
                      v-model="state.newKeep.name"
+                     required
               >
               <small id="helpId" class="form-text text-muted mb-2">Keep Name</small>
               <input type="text"
@@ -64,6 +65,7 @@
                      aria-describedby="helpId"
                      placeholder=""
                      v-model="state.newKeep.description"
+                     required
               >
               <small id="helpId" class="form-text text-muted">Keep Description</small>
               <input type="text"
@@ -121,6 +123,7 @@
                        aria-describedby="helpId"
                        placeholder=""
                        v-model="state.newVault.description"
+                       required
                 >
                 <small id="helpId" class="form-text text-muted">Vault Description</small>
                 <div class="col-12 d-flex justify-content-beginning">
@@ -130,6 +133,7 @@
                     <input type="checkbox"
                            name="isPrivate"
                            v-model="state.newVault.isPrivate"
+                           required
                     >
                   </p>
                 </div>

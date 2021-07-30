@@ -56,7 +56,9 @@
                      id=""
                      aria-describedby="helpId"
                      placeholder=""
+                     minlength="3"
                      v-model="state.newKeep.name"
+                     required
               >
               <small id="helpId" class="form-text text-muted mb-2">Keep Name</small>
               <input type="text"
@@ -66,6 +68,7 @@
                      aria-describedby="helpId"
                      placeholder=""
                      v-model="state.newKeep.description"
+                     required
               >
               <small id="helpId" class="form-text text-muted">Keep Description</small>
               <input type="text"
@@ -74,10 +77,11 @@
                      id=""
                      aria-describedby="helpId"
                      placeholder=""
+                     required
                      v-model="state.newKeep.img"
               >
               <small id="helpId" class="form-text text-muted">Keep Img</small>
-              <button class="mt-5 btn btn-block btn-info">
+              <button class="mt-5 btn btn-block btn-info" type="submit">
                 Create
               </button>
             </form>
@@ -113,6 +117,8 @@
                        id=""
                        aria-describedby="helpId"
                        placeholder=""
+                       required="true"
+                       minlength="3"
                        v-model="state.newVault.name"
                 >
                 <small id="helpId" class="form-text text-muted mb-2">Vault Name</small>
@@ -122,6 +128,8 @@
                        id=""
                        aria-describedby="helpId"
                        placeholder=""
+                       required="true"
+                       minlength="3"
                        v-model="state.newVault.description"
                 >
                 <small id="helpId" class="form-text text-muted">Vault Description</small>
@@ -131,6 +139,7 @@
 
                     <input type="checkbox"
                            name="isPrivate"
+
                            v-model="state.newVault.isPrivate"
                     >
                   </p>

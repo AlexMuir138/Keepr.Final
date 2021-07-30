@@ -82,7 +82,7 @@ namespace Keepr.Controllers
       }
     }
     [HttpPut("/views/{id}")]
-    async public Task<ActionResult<Keep>> UpdateKeep(int id, [FromBody] Keep newKeep)
+    public ActionResult<Keep> UpdateKeep(int id, [FromBody] Keep newKeep)
     {
       try
       {
