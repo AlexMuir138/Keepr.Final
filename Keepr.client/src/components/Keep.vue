@@ -9,9 +9,6 @@
                height="30"
           />
         </router-link>
-        <button @click="deleteKeep(keep.id)" v-if="keep.creatorId == account.id">
-          x
-        </button>
       </h5>
     </div>
   </div>
