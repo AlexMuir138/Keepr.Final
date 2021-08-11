@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row m-5">
       <div class="col-2">
-        <img class="rounded-circle"
+        <img class="rounded-circle shadow"
              alt=""
              :src="profile.picture"
         />
