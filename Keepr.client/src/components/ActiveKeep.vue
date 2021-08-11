@@ -9,8 +9,8 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="comment-form modal-content">
         <div class="row">
-          <div class="col-6">
-            <h5 class="modal-title text-dark" id="exampleModalLongTitle">
+          <div class="col-6 d-flex align-items-center">
+            <h5 class="modal-title text-dark m-1" id="exampleModalLongTitle">
               <img :src="activeKeep.img" class="rounded img-fluid" />
             </h5>
           </div>
