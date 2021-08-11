@@ -94,7 +94,7 @@ export default {
 //   bottom: 0;
 // }
 
-.problem-child{
-  min-height: 43vh;
-}
+// .problem-child{
+//   min-height: 25vh;
+// }
 </style>
