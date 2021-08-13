@@ -21,7 +21,7 @@
           </button>
         </h2>
       </div>
-      <div class="col-12 d-flex">
+      <div class="col-12 d-flex ">
         <Vault v-for="v in vaults" :key="v.id" :vault="v" />
       </div>
     </div>
