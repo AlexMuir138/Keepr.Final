@@ -171,7 +171,7 @@ import { profilesService } from '../services/ProfilesService'
 export default {
   setup() {
     const route = useRoute()
-    watchEffect(() => {
+    onMounted(() => {
       profilesService.getProfileById(route.params.id)
       keepsService.getKeepsById(route.params.id)
       vaultsService.getVaultsById(route.params.id)

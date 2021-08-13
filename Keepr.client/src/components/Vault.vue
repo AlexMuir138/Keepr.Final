@@ -4,11 +4,11 @@
       <div class="Vault card m-3 shadow">
         <div class="p-3 my-3">
           <h5 class="vault-name text-primary text-center">
-            <u>{{ vault.name }}</u>
           </h5>
         </div>
       </div>
     </router-link>
+    <u>{{ vault.name }}</u>
     <div class="d-flex justify-content-center">
       <button @click="deleteVault(vault.id)" v-if="vault.creatorId === account.id" class="btn btn-danger" title="Delete Vault">
         Delete
@@ -19,15 +19,15 @@
     <router-link :to="{name: 'Vault', params: {id: vault.id}}" @click="setActiveVault">
       <div class="Vault card m-3 shadow">
         <div class="p-3 my-3">
-          <h5 class="vault-name text-primary text-center">
-            <u>{{ vault.name }}</u>
+          <h5 class="vault-name text-danger text-center">
             <div>
-              <p>Private man!</p>
+              <p>Private!</p>
             </div>
           </h5>
         </div>
       </div>
     </router-link>
+    <u>{{ vault.name }}</u>
     <div class="d-flex justify-content-center">
       <button @click="deleteVault(vault.id)" v-if="vault.creatorId === account.id" class="btn btn-danger" title="Delete Vault">
         Delete
