@@ -157,6 +157,9 @@
     <div class="col-12">
       <h2 class="m-4">
         Keeps:
+        <div class="masonry-with-flex m-2 flex-wrap">
+          <Keep v-for="k in keeps" :key="k.id" :keep="k" class="keep" />
+        </div>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createKeepModal">
           +
         </button>
@@ -174,6 +177,7 @@ export default {
   setup() {
     onMounted(() => {
       vaultsService.getVaults()
+      keepsService.getAllKeeps()
     })
     const state = reactive({
       newKeep: {},
@@ -189,7 +193,7 @@ export default {
       },
       createVault() {
         vaultsService.createVault(state.newVault)
-        vaultsService.getVaults()
+        vaultsService.getVaultsById()
       }
     }
   }

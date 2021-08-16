@@ -155,7 +155,7 @@
         </button>
       </h2>
     </div>
-    <div class="masonry-with-flex m-2">
+    <div class="masonry-with-flex m-2 flex-wrap">
       <Keep v-for="k in keeps" :key="k.id" :keep="k" class="keep" />
     </div>
   </div>
